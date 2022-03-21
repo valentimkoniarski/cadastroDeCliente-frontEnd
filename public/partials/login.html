@@ -1,0 +1,52 @@
+<div class="container">
+  <form novalidate name="formLogin" class="row" ng-submit="autenticar()">
+    <div
+      style="
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px #000;
+        margin-top: 100px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
+      <div class="form-group">
+        <label>Usuário</label>
+        <input
+          ng-model="usuario.email"
+          name="email"
+          class="form-control"
+          required
+        />
+        <span
+          ng-show="formLogin.email.$error.required && formLogin.email.$touched"
+          class="text-danger"
+        >
+          O login é obrigatório
+        </span>
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input
+          type="password"
+          ng-model="usuario.senha"
+          name="senha"
+          class="form-control"
+          required
+        />
+        <span
+          ng-show="formLogin.senha.$error.required && formLogin.senha.$touched"
+          class="text-danger"
+        >
+          A senha é obrigatória
+        </span>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary my-3">Entrar</button>
+        <a href="/registro" class="btn btn-primary">Registrar</a>
+      </div>
+    </div>
+  </form>
+</div>

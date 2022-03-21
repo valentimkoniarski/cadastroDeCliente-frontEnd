@@ -1,24 +1,32 @@
-angular.module('projeto', 
-    ['ngResource','ngRoute', 'ngAnimate', 'ngCookies', 'Picture', 'Panel', 'FotoService'])
-    .config(function($routeProvider, $locationProvider) {
+angular
+  .module("cadastroDeClientes", [
+    "minhasDiretivas",
+    "minhasDiretivasFoto",
+    "ngAnimate",
+    "ngRoute",
+    "ngResource",
+  ])
+  .config(function ($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
 
-        $locationProvider.html5Mode(true);
-
-        $routeProvider.when('/fotos', {
-            templateUrl: 'partials/principal.html',
-            controller: 'PrincipalController'
-        });
-
-        $routeProvider.when('/fotos/new', {
-            templateUrl: 'partials/foto.html',
-            controller: 'FotoController'
-        });
-
-        $routeProvider.when('/fotos/edit/:fotoId', {
-            templateUrl: 'partials/foto.html',
-            controller: 'FotoController'
-        });
-
-        $routeProvider.otherwise({redirectTo: '/fotos'});
-
+    $routeProvider.when("/login", {
+      templateUrl: "partials/login.html",
+      controller: "LoginController",
     });
+
+    $routeProvider.when("/registro", {
+      templateUrl: "partials/registro.html",
+      controller: "RegistroController",
+    });
+
+    var token = localStorage.getItem("token");
+
+    if (token) {
+      $routeProvider.when("/clientes", {
+        templateUrl: "partials/cliente.html",
+        controller: "ClienteController",
+      });
+    }
+
+    $routeProvider.otherwise({ redirectTo: "/login" });
+  });
