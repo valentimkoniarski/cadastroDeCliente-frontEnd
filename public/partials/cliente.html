@@ -18,12 +18,25 @@
         aria-label="Pesquisar"
         aria-describedby="basic-addon2"
       />
-      <div class="input-group-append">
-        <button class="btn btn-secondary" type="button">Pesquisar</button>
+      <div class="input-group-append" style="margin-right: 40px;" >
+        <button class="btn btn-info" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
       </div>
     </div>
   </form>
 </nav>
+
+<div style="margin-top: 20px; margin-right: 50px; text-align: right" >
+  <button
+     type="button"
+     class="btn btn-primary"
+     ng-click="abrirModalAddClientes()"
+     ng-model="addCliente"
+     data-toggle="modal"
+     data-target="#modalAddClientes"
+   >
+     <i class="fas fa-plus"></i>
+   </button>
+</div>
 
 <div class="container my-5">
   <div class="row">
@@ -48,8 +61,8 @@
                   <th>Tipo</th>
                   <th>Nome</th>
                   <th>Número do Documento</th>
-                  <th>Telefone</th>
-                  <th>Endereço</th>
+                  <th style="text-align: center;">Telefones</th>
+                  <th style="text-align: center;">Endereços</th>
                   <th>Ações</th>
                 </tr>
               </thead>
@@ -59,6 +72,7 @@
                   <td>{{cliente.tipoPessoa}}</td>
                   <td>{{cliente.nome}}</td>
                   <td>
+
                     <span ng-if="cliente.tipoPessoa == 'FISICA'">
                       {{ aplicarMascaraCpf(cliente.numDocumento) }}
                     </span>
@@ -68,21 +82,20 @@
                   </td>
 
                   <!-- QUANDO O USUARIO CLICAR EM TELEFONES ABRI UM MODAL COM TELEFONES -->
-                  <td>
+                  <td style="text-align: center;" >
                     <button
                       type="button"
                       class="btn btn-primary"
                       ng-click="abrirModalTelefones(cliente.id)"
                       ng-model="cliente.id"
-
                       data-toggle="modal"
                       data-target="#modalTelefones"
 
                     >
-                      Telefones
+                      <i class="fas fa-phone"></i>
                     </button>
                   </td>
-                  <td>
+                  <td style="text-align: center;" >
                     <button
                       type="button"
                       class="btn btn-primary"
@@ -92,20 +105,16 @@
                       data-toggle="modal"
                       data-target="#modalEnderecos"
                     >
-                    Endereços
+                      <i class="fas fa-map-marker-alt"></i>
                   </button>
                   </td>
-                  <td>
-                    <a
-                      href="/clientes/edit/{{cliente._id}}"
-                      class="btn btn-primary"
-                      >Editar</a
-                    >
-                    <a
-                      href="/clientes/delete/{{cliente._id}}"
-                      class="btn btn-danger"
-                      >Remover</a
-                    >
+                  <td style="text-align: center;" >
+                    <i class="fas fa-edit">
+                      <a href="/clientes/edit/{{cliente._id}}"></a>        
+                    </i>
+                    <i class="fas fa-trash">
+                      <a href="/clientes/delete/{{cliente._id}}"></a>         
+                    </i>
                   </td>
                 </tr>
               </tbody>
@@ -116,22 +125,24 @@
     </div>
   </div>
 </div>
-<!-- MODAL DE ENDEREÇOS -->
+
+<!-- MODAL ADD CLIENTE -->
+
+
 <div
-  class="modal fade bd-example-modal-lg"
-  id="modalEnderecos"
-  data-backdrop="static"
-  data-keyboard="false"
+  class="modal fade"
+  id="modalAddClientes"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="myLargeModalLabel"
+  aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Lista de Endereços</h5>
-       
+        <h5 class="modal-title" id="exampleModalLabel">
+          Adicionar Cliente
+        </h5>
         <button
           type="button"
           class="close"
@@ -142,137 +153,76 @@
         </button>
       </div>
       <div class="modal-body">
-        
-        <form class="form-control"
-
-        name="formEndereco"
-        
-
-        >
+        <form>
           <div class="form-group">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-8">
-                  <label for="rua">Rua</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="rua"
-                    placeholder="digite a rua"
-                    ng-model="rua"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <label for="numero">Número</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="numero"
-                    placeholder="digite o numero"
-                    ng-model="numero"
-                  />
-                </div>
-              </div>
-            </div>
+            <label for="exampleInputEmail1">Tipo de Pessoa</label>
+            <select
+              class="form-control"
+              id="exampleFormControlSelect1"
+              ng-model="tipoPessoa"
+            >
+              <option value="FISICA">Física</option>
+              <option value="JURIDICA">Jurídica</option>
+            </select>
           </div>
-
           <div class="form-group">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-6">
-                  <label for="bairro">Bairro</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="bairro"
-                    placeholder="digite o bairro"
-                    ng-model="bairro"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label for="cidade">Cidade</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="cidade"
-                    placeholder="digite a cidade"
-                    ng-model="cidade"
-                  />
-                </div>
-              </div>
-            </div>
+            <label for="exampleInputEmail1">Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Nome"
+              ng-model="nome"
+            />
+          </div>  
+          <div class="form-group">
+            <label for="exampleInputEmail1">CPF/CNPJ</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="CPF/CNPJ"
+              ng-model="numDocumento"
+              ng-if="tipoPessoa == 'FISICA'"
+            />
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="CPF/CNPJ"
+              ng-model="numDocumento"
+              ng-if="tipoPessoa == 'JURIDICA'"
+            />
           </div>
-          <div class="form-group my-3">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="cep">Principal</label>
-                  <!-- CHECKBOX SE É PRINCIAP OU NÃO-->
-                  <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    ng-model="principal"
-                  />
-              </div>
-              <div class="col-md-4">
-                <button
-                  type="button"
-                  class="btn btn-primary my-3 "
-                  ng-click="adicionarEndereco(cliente_id)"
-                >Add
-              </button>
-          </div>
-           
-          </div>
-
-          
-        </form>
-
-        <table
-          class="table table-bordered my-2"
-          id="dataTable"
-          width="100%"
-          cellspacing="0"
-        >
-          <thead class="thead-dark">
-            <tr>
-              <th>Rua</th>
-              <th>Nº</th>
-              <th>Bairro</th>
-              <th>Cidade</th>
-              <th>Principal</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr ng-repeat="endereco in enderecos">
-              <td>{{endereco.rua}}</td>
-              <td>{{endereco.numero}}</td>
-              <td>{{endereco.bairro}}</td>
-              <td>{{endereco.cidade}}</td>
-              <td>{{endereco.principal}}</td>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  ng-click="removerEndereco(endereco.id)"
-                >
-                  Remover
-                </button>
-                
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Fechar
-      </div>
+         
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+          >
+            Fechar
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            ng-click="addCliente()"
+            data-dismiss="modal"
+          >
+            Salvar
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+      
+
+<!-- FIM MODAL ADD CLIENTE -->
 
 <!-- MODAL DE TELEFONES -->
 <div
@@ -355,6 +305,161 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- MODAL DE ENDEREÇOS -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="modalEnderecos"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Lista de Endereços</h5>
+      </div>
+      <div class="modal-body">
+        <form class="form-control"
+        name="formEndereco"
+        >
+          <div class="form-group">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-8">
+                  <label for="rua">Rua</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="rua"
+                    placeholder="digite a rua"
+                    ng-model="rua"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="numero">Número</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="numero"
+                    placeholder="digite o numero"
+                    ng-model="numero"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="bairro">Bairro</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="bairro"
+                    placeholder="digite o bairro"
+                    ng-model="bairro"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="cidade">Cidade</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cidade"
+                    placeholder="digite a cidade"
+                    ng-model="cidade"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group my-3">
+            <div class="col-md-12 input-group ">
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="cep">Principal</label>
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    ng-model="principal"
+                  />
+                  
+
+              </div>
+              <div class="col-md-10" style="text-align: right; align-items: right;">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  ng-click="adicionarEndereco(cliente_id)"
+                  ng-disabled="formEndereco.$invalid"
+                >
+                  Adicionar
+                </button>
+              </div>
+            </div>
+          </div>
+        
+          
+        </form>
+
+        <table
+          class="table table-bordered my-2"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead class="thead-dark">
+            <tr>
+              <th>Rua</th>
+              <th>Nº</th>
+              <th>Bairro</th>
+              <th>Cidade</th>
+              <th>Principal</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="endereco in enderecos">
+              <td>{{endereco.rua}}</td>
+              <td>{{endereco.numero}}</td>
+              <td>{{endereco.bairro}}</td>
+              <td>{{endereco.cidade}}</td>
+              <td>{{endereco.principal}}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  ng-click="removerEndereco(endereco.id)"
+                >
+                  Remover
+                </button>
+                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Fechar
+    </div>
+  </div>
+</div>
+
+
+
+
 
 <script>
   $(document).ready(function () {

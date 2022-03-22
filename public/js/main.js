@@ -21,10 +21,16 @@ angular
 
     var token = localStorage.getItem("token");
 
+    // ROTAS PRIVADAS
     if (token) {
       $routeProvider.when("/clientes", {
         templateUrl: "partials/cliente.html",
         controller: "ClienteController",
+      });
+
+      $routeProvider.when("/clientes/cadastro", {
+        templateUrl: "partials/cliente-cadastro.html",
+        controller: "ClienteCadastroController",
       });
     }
 

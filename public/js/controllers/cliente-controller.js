@@ -26,6 +26,40 @@ angular
         console.log(error);
       });
 
+    $scope.abrirModalAddClientes = function () {
+      $("#modalAddClientes").modal("show");
+    };
+
+    $scope.addCliente = function () {
+      var dadosCliente = {
+        nome: $scope.nome,
+        numDocumento: "11",
+        tipoPessoa: $scope.tipoPessoa,
+      };
+
+      console.log(dadosCliente);
+
+      var adicionaCliente = $http.post(
+        `http://localhost:8080/clientes`,
+        dadosCliente,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      adicionaCliente
+        .then(function (retorno) {
+          $scope.clientes.push(retorno.data);
+          $scope.mensagem = "Cliente adicionado com sucesso!";
+          $("#modalAddClientes").modal("hide");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+
     // TELEFONES
     $scope.abrirModalTelefones = function (cliente_id) {
       $("#modalTelefones").modal("show");
