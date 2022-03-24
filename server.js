@@ -1,8 +1,10 @@
-var http = require('http')
-    ,app = require('./config/express')
-    db = require('./config/database');
+var http = require("http");
 
-http.createServer(app).listen(3000, function() {
-    console.log('Servidor escutando na porta: ' + this.address().port);
+var express = require("express"),
+  app = express();
+
+app.use(express.static("./public"));
+
+http.createServer(app).listen(3000, function () {
+  console.log("Servidor rodando na porta " + this.address().port);
 });
-

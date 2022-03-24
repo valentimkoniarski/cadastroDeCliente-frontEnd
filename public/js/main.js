@@ -1,13 +1,7 @@
 angular
-  .module("cadastroDeClientes", [
-    "minhasDiretivas",
-    "minhasDiretivasFoto",
-    "ngAnimate",
-    "ngRoute",
-    "ngResource",
-  ])
+  .module("cadastroDeClientes", ["ngRoute", "ngAnimate", "ngResource"])
   .config(function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
 
     $routeProvider.when("/login", {
       templateUrl: "partials/login.html",
@@ -26,11 +20,6 @@ angular
       $routeProvider.when("/clientes", {
         templateUrl: "partials/cliente.html",
         controller: "ClienteController",
-      });
-
-      $routeProvider.when("/clientes/cadastro", {
-        templateUrl: "partials/cliente-cadastro.html",
-        controller: "ClienteCadastroController",
       });
     }
 

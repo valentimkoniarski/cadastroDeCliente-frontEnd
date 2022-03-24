@@ -4,6 +4,8 @@ angular
     $scope.foto = {};
     $scope.mensagem = "";
 
+    $scope.loading = false;
+
     $scope.usuario = {
       email: $scope.email,
       senha: $scope.senha,

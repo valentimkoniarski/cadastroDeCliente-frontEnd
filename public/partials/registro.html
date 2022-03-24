@@ -49,6 +49,7 @@
           name="senha"
           class="form-control"
           required
+          type="password"
         />
         <span
           ng-show="formRegistro.senha.$error.required && formRegistro.senha.$touched"
@@ -57,7 +58,7 @@
           A senha é obrigatória
         </span>
       </div>
-      <div class="form-group">
+      <div class="form-group my-2">
         <button type="submit" class="btn btn-primary">Registrar</button>
         <a href="/login" class="btn btn-primary">Já possui login?</a>
       </div>
