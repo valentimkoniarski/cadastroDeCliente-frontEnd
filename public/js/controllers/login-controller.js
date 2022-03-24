@@ -23,6 +23,8 @@ angular
           .then(function (response) {
             $scope.mensagem = "Login realizado com sucesso!";
 
+            console.log(response);
+
             // salva o token no localstorage
             localStorage.setItem("token", response.data.token);
 

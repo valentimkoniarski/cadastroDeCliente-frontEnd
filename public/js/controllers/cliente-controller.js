@@ -349,7 +349,7 @@ angular
 
     $scope.logout = function () {
       localStorage.removeItem("token");
-      window.location.href = "http://localhost:3000/#/login";
+      window.location.href = "http://localhost:3000/";
     };
 
     $scope.aplicarMascaraCpf = function (cpf) {

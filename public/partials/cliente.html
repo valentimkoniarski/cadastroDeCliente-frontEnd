@@ -33,9 +33,6 @@
   </form>
 </nav>
 
-
-
-
 <div style="margin-top: 20px; margin-right: 50px; text-align: right" >
   <button
      type="button"
@@ -198,6 +195,7 @@
               placeholder="CPF/CNPJ"
               ng-model="numDocumento"
               ng-show="tipoPessoa == 'FISICA'"
+              ng-minlength="14"
             />
             <input
               type="text"
@@ -207,13 +205,14 @@
               placeholder="CPF/CNPJ"
               ng-model="numDocumento"
               ng-show="tipoPessoa == 'JURIDICA'"
+              ng-minlength="18"
+              
             />
+      
             <div ng-show="erroNumeroDocumento" class="alert alert-danger my-2">
               {{erroNumeroDocumento}}
             </div>
-
-          </div>
-         
+          </div>    
         </div>
         <div class="modal-footer">
           <button
@@ -229,6 +228,7 @@
             class="btn btn-primary"
             ng-click="addCliente(cliente_id)"
             data-dismiss="modal"
+            ng-disabled="!nome || !numDocumento || !tipoPessoa"
           >
             Salvar 
           </button>
@@ -255,15 +255,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Lista de Telefones</h5>
-       
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body">
         <div class="form-control input-group">
@@ -278,7 +269,7 @@
             type="button"
             class="btn btn-primary"
             ng-click="adicionarTelefone(cliente_id)"
-            
+            ng-disabled="!telefone || telefone.length <= 13"      
           >
             Adicionar
           </button>
@@ -412,7 +403,7 @@
                     type="button"
                     class="btn btn-primary"
                     ng-click="adicionarEndereco(cliente_id)"
-                    ng-disabled="formEndereco.$invalid"
+                    ng-disabled="!rua || !numero || !bairro || !cidade" 
                   >
                     Adicionar
                   </button>
