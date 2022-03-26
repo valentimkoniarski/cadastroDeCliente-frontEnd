@@ -5,7 +5,7 @@ angular
     $scope.mensagem = "";
 
     $scope.usuario = {
-      email: $scope.nome,
+      nome: $scope.nome,
       email: $scope.email,
       senha: $scope.senha,
     };
