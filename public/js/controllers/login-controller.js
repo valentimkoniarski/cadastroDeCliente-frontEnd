@@ -4,8 +4,6 @@ angular
     $scope.foto = {};
     $scope.mensagem = "";
 
-    $scope.loading = false;
-
     $scope.usuario = {
       email: $scope.email,
       senha: $scope.senha,
@@ -29,7 +27,7 @@ angular
             localStorage.setItem("token", response.data.token);
 
             // redireciona para a pagina principal
-            $location.path("/clientes");
+            $location.path("/#/clientes");
           })
           .catch(function (error) {
             console.log(error);
